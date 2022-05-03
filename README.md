@@ -226,6 +226,7 @@ Model_Accuracy(CART.matrix)
 ---
 Shiny Dashboard     : *https://hjeanfr.shinyapps.io/Credit_Project/
 Tableau Dashboard1  : *https://public.tableau.com/authoring/CreditStatus/Dashboard1#1
-Tableau Dashboard2  : *https://public.tableau.com/authoring/CreditStatus/Dashboard1/Dashboard%202#1
+Tableau Dashboard2  : *https://public.tableau.com/authoring/CreditStatus/Dashboard2#2
+
 
 
