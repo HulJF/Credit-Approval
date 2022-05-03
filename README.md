@@ -1,6 +1,7 @@
 # Credit-Approval
 ---
-title: "R Notebook"
+title: "Credit Situation"
+author: "HJF
 output: html_notebook
 ---
 
@@ -144,9 +145,9 @@ ggplot(data = Status)+
 ```
 ![image](https://user-images.githubusercontent.com/95668517/166397332-a026424e-4e46-4aab-9756-3c876d78ecb9.png)
 
-#Machine Learning Models
+# Machine Learning Models
 
-#Naive Bayes
+# Naive Bayes
 
 ```{r}
 ## Prepare Training and Testing Sets
@@ -188,7 +189,7 @@ Accuracy
 ![image](https://user-images.githubusercontent.com/95668517/166398054-5d3ab0c4-4e7c-4d6e-bd80-934e9cad86df.png)
 
 
-#Decision Trees
+# Decision Trees
 
 
 ```{r}
@@ -221,8 +222,8 @@ Model_Accuracy(CART.matrix)
 ![image](https://user-images.githubusercontent.com/95668517/166398500-4e0c33d6-6f62-48d4-b667-ae8b1e40141f.png)
 
 
-Shiny visualization     : https://hjeanfr.shinyapps.io/Credit_Project/
-Tableau visualization1  : https://public.tableau.com/authoring/CreditStatus/Dashboard1#1
-Tableau visualization2  : https://public.tableau.com/authoring/CreditStatus/Dashboard1/Dashboard%202#1
+Shiny visualization     : *https://hjeanfr.shinyapps.io/Credit_Project/
+Tableau visualization1  : *https://public.tableau.com/authoring/CreditStatus/Dashboard1#1
+Tableau visualization2  : *https://public.tableau.com/authoring/CreditStatus/Dashboard1/Dashboard%202#1
 
 
