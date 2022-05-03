@@ -221,7 +221,9 @@ Model_Accuracy(CART.matrix)
 ```
 ![image](https://user-images.githubusercontent.com/95668517/166398500-4e0c33d6-6f62-48d4-b667-ae8b1e40141f.png)
 
-#* Other Visualization
+---
+# Other Visualization
+---
 Shiny Dashboard     : *https://hjeanfr.shinyapps.io/Credit_Project/
 Tableau Dashboard1  : *https://public.tableau.com/authoring/CreditStatus/Dashboard1#1
 Tableau Dashboard2  : *https://public.tableau.com/authoring/CreditStatus/Dashboard1/Dashboard%202#1
