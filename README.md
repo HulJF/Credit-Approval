@@ -77,6 +77,8 @@ head(Credit)
 ```
 
 
+
+
 ```{r}
 str(Credit)
 ```
@@ -121,6 +123,7 @@ ggplot(data = Status)+
 
 print(" The persons eligible to credit line increase are mostly married and they own a property ")
 ```
+![image](https://user-images.githubusercontent.com/95668517/166390482-2442e05e-48f7-4f96-9f89-ed91475a74e4.png)
 
 
 
