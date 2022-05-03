@@ -127,9 +127,13 @@ plot
 ```
 ![image](https://user-images.githubusercontent.com/95668517/166390988-a760785d-f9b7-4b29-b8f1-ae901a9a6047.png)
 
+```{r}
 #Education
 ggplot(data = ExcellentCredit)+
   geom_histogram(mapping = aes(x = NAME_EDUCATION_TYPE ), stat = "count" , binwidth = 3, fill = "blue")+ coord_flip()+theme_base()+labs(title = "Education Level", x= " ")
+```
+![image](https://user-images.githubusercontent.com/95668517/166391041-96a544c3-458d-4b1e-a38d-c0ab6b6520a7.png)
+  
 ```{r}
 #Family Status
 Status <-group_by(ExcellentCredit, NAME_FAMILY_STATUS)
@@ -138,22 +142,20 @@ ggplot(data = Status)+
   geom_histogram(mapping = aes(x = NAME_FAMILY_STATUS), stat = "count" , binwidth = 3, fill = "green")+ coord_flip()+theme_calc()+ labs(title = "Marital Status", x= " ")
  print(" The persons eligible to credit line increase are mostly married and they own a property ")
 ```
-![image](https://user-images.githubusercontent.com/95668517/166391041-96a544c3-458d-4b1e-a38d-c0ab6b6520a7.png)
+![image](https://user-images.githubusercontent.com/95668517/166397332-a026424e-4e46-4aab-9756-3c876d78ecb9.png)
 
+#Machine Learning Models
 
-###Naive Bayes
+#Naive Bayes
 
 ```{r}
-
 ## Prepare Training and Testing Sets
-
 set.seed(123) #to guarantee repeatable results
 
 # Split the data
 Sample1 <- sample.split(Credit, SplitRatio = .75)
 Train1 <- subset(Credit, Sample1 == TRUE)
 Test1<- subset(Credit, Sample1 == FALSE)
-
 ```
 
 
@@ -174,9 +176,8 @@ NBPrediction<- predict(NBModel, Test1, type = "class")
 
 NBMatrix <- table(Test1$IncreaseCL, NBPrediction, dnn = c("Actual", "Prediction"))
 NBMatrix
-
-
 ```
+![image](https://user-images.githubusercontent.com/95668517/166397895-6f2fd74b-6e02-4db3-8c9b-74792b2049a5.png)
 
 
 ```{r}
@@ -184,16 +185,18 @@ NBMatrix
 Accuracy<- sum( diag(NBMatrix)/ sum(NBMatrix))
 Accuracy
 ```
+![image](https://user-images.githubusercontent.com/95668517/166398054-5d3ab0c4-4e7c-4d6e-bd80-934e9cad86df.png)
 
-###Decision Trees###
+
+#Decision Trees
 
 
 ```{r}
 #Build a CART Tree
 cartTreeModel <- rpart(IncreaseCL ~., data = Train1)
 cartTreeModel
-
 ```
+
 ```{r}
 # Visualize the tree
 rpart.plot(cartTreeModel,extra = 3, under = TRUE)
@@ -204,6 +207,8 @@ pred.cart <- predict(cartTreeModel, newdata = Test1, type = "class")
 CART.matrix <- table(Test1$IncreaseCL, pred.cart, dnn = c("Actual", "Prediction"))
 CART.matrix
 ```
+![image](https://user-images.githubusercontent.com/95668517/166398318-f1c4d467-2d5c-4125-aaa7-14b2227fa121.png)
+
 
 ````{r}
 # Accuracy function
@@ -213,120 +218,11 @@ Model_Accuracy <- function(matrix){
 }
 Model_Accuracy(CART.matrix)
 ```
+![image](https://user-images.githubusercontent.com/95668517/166398500-4e0c33d6-6f62-48d4-b667-ae8b1e40141f.png)
 
 
+Shiny visualization     : https://hjeanfr.shinyapps.io/Credit_Project/
+Tableau visualization1  : https://public.tableau.com/authoring/CreditStatus/Dashboard1#1
+Tableau visualization2  : https://public.tableau.com/authoring/CreditStatus/Dashboard1/Dashboard%202#1
 
-##.
-##SVM
-##.
 
-```{r}
-
-## Prepare Training and Testing Sets
-
-set.seed(123) #to guarantee repeatable results
-
-# Split the data
-Sample2 <- sample.split(Credit, SplitRatio = .75)
-Train2 <- subset(Credit, Sample2 == TRUE)
-Test2<- subset(Credit,Sample2 == FALSE)
-
-```
-
-#SVM Model
-Train a simple linear SVM
-```{r}
-modelSVM <- ksvm(IncreaseCL ~., data = Train2, kernel = "vanilladot")
-
-# look at basic information about the model
-modelSVM
-```
-
-#Predict
-```{r}
-pred <- predict(modelSVM, Credit_test)
-
-#Generate Confusion Matrix
-confusionMatrix <- table (
-  pred,
-  Credit_test$Approved ,
-  dnn = c("Prediction", "Actual"))
-
-#Calculate accuracy
-accuracy <- sum(diag(confusionMatrix))/sum(confusionMatrix)
-cat("Vanilla Kernel Accuracy:",accuracy)
-```
-
-#Train a rbfdot SVM
-```{r}
-set.seed(12345)
-modelSVM2 <- ksvm(Approved ~., data = Credit_train, kernel = "rbfdot")
-
-#look at basic information about the model
-modelSVM2
-```
-
-#Predict
-```{r}
-pred2 <- predict(modelSVM2, Credit_test)
-
-#Generate Confusion Matrix
-confusionMatrix2 <- table (
-  pred2,
-  Credit_test$Approved ,
-  dnn = c("Prediction", "Actual"))
-
-#Calculate accuracy
-accuracy2 <- sum(diag(confusionMatrix2))/sum(confusionMatrix2)
-cat(" Gaussian Kernel Accuracy:",accuracy2)
-
-```
-#Train a polydot SVM
-```{r}
-set.seed(12345)
-modelSVM3 <- ksvm(primary_energy_consumption ~., data = EnergyConsumption_train, kernel = "polydot")
-
-#look at basic information about the model
-modelSVM3
-```
-
-#Predict
-```{r}
-pred3 <- predict(modelSVM3, EnergyConsumption_test)
-
-#Generate Confusion Matrix
-confusionMatrix3 <- table (
-  pred3,
-  EnergyConsumption_test$primary_energy_consumption ,
-  dnn = c("Prediction", "Actual"))
-
-#Calculate accuracy
-accuracy3 <- sum(diag(confusionMatrix3))/sum(confusionMatrix3)
-cat(" Polydot Kernel Accuracy:",accuracy3)
-
-```
-
-#Train a tanhdot SVM
-```{r}
-set.seed(12345)
-modelSVM4 <- ksvm(Approved ~., data = Credit_train, kernel = "tanhdot", cost = 5)
-
-#look at basic information about the model
-modelSVM4
-```
-
-#Predict
-```{r}
-pred4 <- predict(modelSVM4, Credit_test)
-
-#Generate Confusion Matrix
-confusionMatrix4 <- table (
-  pred4,
-  Credit_test$Approved ,
-  dnn = c("Prediction", "Actual"))
-
-#Calculate accuracy
-accuracy4 <- sum(diag(confusionMatrix4))/sum(confusionMatrix4)
-cat(" tanhdot Kernel Accuracy:",accuracy4)
-
-```
