@@ -58,8 +58,9 @@ Credit <- merge(Application, Record, # dataset names
 ```{r}
 #Overview of the NA 
 sapply(Credit, function(x)sum(is.na(x)))
-
 ```
+![image](https://user-images.githubusercontent.com/95668517/166390625-08ec1888-be5b-46b7-a375-2673cebd1625.png)
+
 ```{r}
 #Variables presents in the dataset
 summary(Credit)
@@ -82,6 +83,8 @@ head(Credit)
 ```{r}
 str(Credit)
 ```
+![image](https://user-images.githubusercontent.com/95668517/166390761-84b40411-6f07-428e-8a00-c89085e46c35.png)
+
 
 ```{r}
 Credit$MONTHS_BIRTH <- Credit$DAYS_BIRTH/30
@@ -92,39 +95,50 @@ Credit$MONTHS_EMPLOYED <- Credit$DAYS_EMPLOYED/30
 ```{r}
 ExcellentCredit<-subset(Credit, IncreaseCL == "Yes")
 head(ExcellentCredit)
+```
 
+
+```{r}
 #Housing 
 Housing <-group_by(ExcellentCredit,NAME_HOUSING_TYPE)
 arrange(summarise (Housing, Number = n()) ,desc(Number)) %>% ggplot(aes(x=NAME_HOUSING_TYPE, y=Number ,fill= NAME_HOUSING_TYPE))+  labs( title = " Housing type of excellent credit persons  ", x= " ", y =" Quantity")+geom_bar(stat="identity", angle =45)+coord_flip()+theme_economist()+theme(legend.position = "none")
+```
+![image](https://user-images.githubusercontent.com/95668517/166390853-b18fbbd5-6d70-479f-bd5d-2cfe980d5ac3.png)
 
+```{r}
 #Own Estate
 Estate <-group_by(ExcellentCredit,FLAG_OWN_REALTY )
 arrange(summarise (Estate, Number = n()) ,desc(Number)) %>% ggplot(aes(x=FLAG_OWN_REALTY, y=Number ,fill= FLAG_OWN_REALTY))+  labs( title = " Property ", x= " ", y =" Quantity")+geom_bar(stat="identity", angle =45)+coord_flip()+theme_economist()+theme(legend.position = "none")
+```
+![image](https://user-images.githubusercontent.com/95668517/166390894-c6723c86-8c37-4ddd-9df9-19fca9a2b2d4.png)
 
+```{r}
 #Own Car
 Car <-group_by(ExcellentCredit,FLAG_OWN_CAR)
 arrange(summarise (Car, Number = n()) ,desc(Number)) %>% ggplot(aes(x=FLAG_OWN_CAR, y=Number ,fill= FLAG_OWN_CAR))+  labs( title = " Car  ", x= " ", y =" Quantity")+geom_bar(stat="identity", angle =45)+coord_flip()+theme_economist()+theme(legend.position = "none")
+```
+![image](https://user-images.githubusercontent.com/95668517/166390950-362fe092-e5e1-4da5-9c27-18fdef76fe24.png)
 
-
+```{r}
 #Work Experience
 plot<- ggplot(data = ExcellentCredit)+
   geom_point(aes(x = MONTHS_EMPLOYED, y = MONTHS_BIRTH, color = MONTHS_BALANCE))+ coord_flip()+theme_clean()+labs(title = "Age vs Experience")
 plot
+```
+![image](https://user-images.githubusercontent.com/95668517/166390988-a760785d-f9b7-4b29-b8f1-ae901a9a6047.png)
 
 #Education
 ggplot(data = ExcellentCredit)+
   geom_histogram(mapping = aes(x = NAME_EDUCATION_TYPE ), stat = "count" , binwidth = 3, fill = "blue")+ coord_flip()+theme_base()+labs(title = "Education Level", x= " ")
-
+```{r}
 #Family Status
 Status <-group_by(ExcellentCredit, NAME_FAMILY_STATUS)
 arrange(summarise (Status, Number = n()),desc(Number))
 ggplot(data = Status)+
   geom_histogram(mapping = aes(x = NAME_FAMILY_STATUS), stat = "count" , binwidth = 3, fill = "green")+ coord_flip()+theme_calc()+ labs(title = "Marital Status", x= " ")
-
-print(" The persons eligible to credit line increase are mostly married and they own a property ")
+ print(" The persons eligible to credit line increase are mostly married and they own a property ")
 ```
-![image](https://user-images.githubusercontent.com/95668517/166390482-2442e05e-48f7-4f96-9f89-ed91475a74e4.png)
-
+![image](https://user-images.githubusercontent.com/95668517/166391041-96a544c3-458d-4b1e-a38d-c0ab6b6520a7.png)
 
 
 ###Naive Bayes
